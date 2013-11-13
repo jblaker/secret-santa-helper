@@ -1,11 +1,20 @@
 <h1>Secret Santa Participants</h1>
 
-<p>Pick your giftee</p>
-
-<table ng-init="getFamilyMembers()" class="table table-striped table-bordered" ng-show="members.length > 0">
-  <tr ng-repeat="member in members">
-    <td>
-      <a ng-click="viewWishlist()">{{member.get('name')}}</a>
-    </td>
-  </tr>
+<table ng-init="getFamilyMembers()" class="table table-hover" ng-show="members.length > 0">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th width="12%">Items in wishlist</th>
+		</tr>
+	</thead>
+	<tbody>
+	  <tr ng-repeat="member in members" ng-init="wishListCount()" ng-click="viewWishlist()" class="member-row">
+	    <td>
+	      <span class="text-primary">{{member.get('name')}}</span>
+	    </td>
+	    <td>
+	    	<span class="badge">{{member.itemCount}}</span>
+	    </td>
+	  </tr>
+	</tbody>
 </table>

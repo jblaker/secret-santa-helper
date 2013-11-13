@@ -64,6 +64,27 @@ app.controller('FamilyController', function($scope, $location, logout, isValidSe
     });
   };
 
+  $scope.wishListCount = function() {
+
+    var thisMember = this.member;
+
+    var WishlistItem = Parse.Object.extend("WishListItem");
+    var query = new Parse.Query(WishlistItem);
+    query.equalTo("member", this.member);
+    query.count({
+      success: function(count) {
+        // The count request succeeded. Show the count
+        $scope.$apply(function(){
+          thisMember.itemCount = count;
+        });
+      },
+      error: function(error) {
+        // The request failed
+      }
+    });
+
+  };
+
   $scope.viewWishlist = function() {
 
     $rootScope.selectedMember = this.member;
