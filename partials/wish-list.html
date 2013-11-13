@@ -1,0 +1,38 @@
+<div ng-init="getWishList()">
+
+  <div class="page-title">
+    <h1>{{selectedMember.get('name')}}'s Wishlist</h1>
+  </div>
+
+  <p ng-show="user.id == memberId">
+    <button type="button" class="btn btn-success" ng-click="addItem()">Add item</button>
+  </p>
+
+  <form ng-submit="addedItem()" role="form" ng-show="addingItem">
+    <div class="form-group">
+      <input type="text" placeholder="Product Name" ng-model="itemName" class="form-control" />
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="Product URL" ng-model="itemURL" class="form-control" />
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Add" class="btn" />
+    </div>
+  </form>
+
+  <table class="table table-striped table-bordered" ng-show="wishListItems.length > 0">
+    <tr ng-repeat="item in wishListItems">
+      <td>
+        <a ng-href="{{item.get('itemURL')}}" target="_blank">{{item.get('itemName')}}</a>
+      </td>
+      <td ng-show="user.id == memberId">
+        <button type="button" class="btn btn-danger" ng-click="deleteItem()">Remove</button>
+      </td>
+    </tr>
+  </table>
+
+  <div ng-show="wishListItems.length == 0">
+    <p>{{selectedMember.get('name')}} hasn't added any items to their wishlist yet.</p>
+  </div>
+
+</div>
